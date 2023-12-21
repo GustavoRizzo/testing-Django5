@@ -2,7 +2,7 @@
 include .env
 
 # Set the project variables
-BACKEND_SERVICE ?= django-aplication
+BACKEND_SERVICE ?= django-application
 REPO_BRANCH ?= develop
 DJANGO_PROJECT_DIR ?= core
 DB_DIR = ./
@@ -14,7 +14,7 @@ DOCKER=PYTHON_VERSION=${PYTHON_VERSION} docker
 DOCKER_COMPOSE=PYTHON_VERSION=${PYTHON_VERSION} DJANGO_PROJECT_DIR=${DJANGO_PROJECT_DIR} COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME} docker compose -f docker-compose.yml
 DOCKER_COMPOSE_DEV=${DOCKER_COMPOSE} -f docker-compose-dev.yml
 
-SERVICES ?= ${BACKEND_SERVICE}
+SERVICES ?= ${BACKEND_SERVICE} nginx
 SERVICES_DEV ?= ${BACKEND_SERVICE}-dev
 
 all: help
@@ -26,6 +26,7 @@ checkout:  ## Checkout a new source version. Using: REPO_BRANCH
 build: deploy  ## Build services images. Using: BUILD_SERVICES
 	@echo "Building docker image for version ${SYSTEM_VERSION}..."
 	@echo "Systems: Python [${PYTHON_VERSION}]"
+	@echo "${DOCKER_COMPOSE} build ${BUILD_SERVICES}"
 	@${DOCKER_COMPOSE} build ${BUILD_SERVICES}
 
 build-dev: deploy-dev ## Build development services images. Using: BUILD_SERVICES

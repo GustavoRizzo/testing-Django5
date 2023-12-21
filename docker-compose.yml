@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  django-aplication:
+  django-application:
     build:
       context: .
       args:
@@ -10,6 +10,24 @@ services:
     restart: unless-stopped
     env_file:
       - '.env'
-    ports:
-      - "${DOCKER_WEB_PORT:-8000}:8000"
+    expose:
+      - "8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings
     tty: true
+    volumes:
+      - static:/app/static  # Map the Django static files directory into the container
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - static:/app/static  # Map the same directory used by Nginx
+    ports:
+      - "${DOCKER_WEB_PORT:-80}:80"
+    depends_on:
+      - django-application
+
+volumes:
+  static:

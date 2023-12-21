@@ -21,6 +21,7 @@ COPY ./ ./
 
 # Use only if we will not share the host volumes
 RUN python manage.py migrate
+RUN python manage.py collectstatic --noinput
 
 ## DEV is used in development environment
 FROM django as dev
@@ -30,9 +31,6 @@ CMD python manage.py runserver 0.0.0.0:8000
 
 ## PROD contains the frontend application served by nginx
 FROM django AS prod
-
-# Configuração do Nginx
-# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose a porta 80
 EXPOSE 80
