@@ -104,14 +104,6 @@ version:  ## Get version
 	@sed -i -e "s|^PYTHON_VERSION=.*|PYTHON_VERSION=${PYTHON_VERSION}|" ./.env
 	@echo "Systems Versions: System ${SYSTEM_VERSION} Python ${PYTHON_VERSION}"
 
-load-devices:
-	@echo "Load devices"
-	@${DOCKER_COMPOSE} run --rm ${BACKEND_SERVICE} ./runscript.sh load_device
-
-load-devices-dev:
-	@echo "Load devices dev"
-	@${DOCKER_COMPOSE_DEV} run --rm ${SERVICES_DEV} ./runscript.sh load_list_devices
-
 help:  ## Show this help
 	@echo "\nAvailable commands:"
 	@echo
