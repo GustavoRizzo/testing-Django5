@@ -31,6 +31,11 @@ CMD python manage.py runserver 0.0.0.0:8000
 ## PROD contains the frontend application served by nginx
 FROM django AS prod
 
-# Run
-CMD gunicorn -c gunicorn.py "core.wsgi:application"
+# Configuração do Nginx
+# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
+# Expose a porta 80
+EXPOSE 80
+
+# Run
+CMD gunicorn -c gunicorn.py "core.wsgi:application" && nginx -g "daemon off;"
