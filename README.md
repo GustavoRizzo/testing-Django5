@@ -1,5 +1,11 @@
 # Demo Django5
 
+## Prerequisites
+
+- [Docker](https://www.docker.com/)
+- [Make](https://www.gnu.org/software/make/)
+
+
 ## Prepare `.env` file
 
 Make a copy from `.env.example` to `.env` file. Edit and adjust the file. After that, just need to load the environment
@@ -10,8 +16,21 @@ cp .env.example .env
 vi .env
 ```
 
+## Run aplication with Docker and Makefile
 
-## Runnig without docker
+```shell
+make up # production
+make up-dev # development
+```
+
+On the first time running the application:
+
+```shell
+make setup
+```
+
+## Run application locally (without docker)
+
 To create the local environment:
 
 ````shell
