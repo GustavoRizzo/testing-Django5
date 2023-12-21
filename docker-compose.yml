@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  django-aplication:
+    build:
+      context: .
+      args:
+        - PYTHON_VERSION
+    container_name: app
+    restart: unless-stopped
+    env_file:
+      - '.env'
+    ports:
+      - "${DOCKER_WEB_PORT:-8000}:8000"
+    tty: true

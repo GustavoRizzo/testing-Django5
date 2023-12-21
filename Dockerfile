@@ -1,0 +1,36 @@
+# Create the base image
+ARG PYTHON_VERSION
+FROM python:${PYTHON_VERSION}-alpine AS base
+
+# Update the system and install needed packages
+RUN apk update && apk upgrade
+RUN apk add --update build-base gcc make git bash curl libffi-dev openssl-dev zlib zlib-dev jpeg-dev freetype freetype-dev
+
+# Create the APP Image
+FROM base as django
+ARG PYTHON_VERSION
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY ./requirements.txt requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+COPY ./manage.py ./manage.py
+COPY ./ ./
+
+# Use only if we will not share the host volumes
+RUN python manage.py migrate
+
+## DEV is used in development environment
+FROM django as dev
+
+# Start the Django
+CMD python manage.py runserver 0.0.0.0:8000
+
+## PROD contains the frontend application served by nginx
+FROM django AS prod
+
+# Run
+CMD gunicorn -c gunicorn.py "core.wsgi:application"
+
