@@ -1,11 +1,13 @@
 version: "3.9"
 
 services:
-    django-aplication-dev:
+    django-application-dev:
         extends:
             file: docker-compose.yml
-            service: django-aplication
+            service: django-application
         container_name: app-dev
+        ports:
+            - "${DOCKER_WEB_PORT:-8000}:8000"
         build:
             target: dev
         volumes:
