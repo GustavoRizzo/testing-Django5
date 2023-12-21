@@ -1,5 +1,17 @@
-# testing-Django5
+# Demo Django5
 
+## Prepare `.env` file
+
+Make a copy from `.env.example` to `.env` file. Edit and adjust the file. After that, just need to load the environment
+variables:
+
+```shell
+cp .env.example .env
+vi .env
+```
+
+
+## Runnig without docker
 To create the local environment:
 
 ````shell
