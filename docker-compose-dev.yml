@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+    django-aplication-dev:
+        extends:
+            file: docker-compose.yml
+            service: django-aplication
+        container_name: app-dev
+        build:
+            target: dev
+        volumes:
+            - "./:/app"
+        # Force the container to stay alive
+        tty: true
