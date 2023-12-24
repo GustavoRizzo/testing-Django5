@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  django-application:
+  django-application: &django
     build:
       context: .
       args:
@@ -17,6 +17,20 @@ services:
     tty: true
     volumes:
       - static:/app/static  # Map the Django static files directory into the container
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+
+  worker:
+    <<: *django
+    container_name: worker
+    command: python manage.py rqworker
+    depends_on:
+      - redis
 
   nginx:
     image: nginx:latest

@@ -1,4 +1,6 @@
 Django==5.0
+django-rq==2.10.1
 djangorestframework==3.14.0
 drf-yasg==1.21.7
 gunicorn==21.2.0
+rq-dashboard==0.6.7
