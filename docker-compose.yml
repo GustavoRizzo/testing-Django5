@@ -18,6 +18,13 @@ services:
     volumes:
       - static:/app/static  # Map the Django static files directory into the container
 
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+
   nginx:
     image: nginx:latest
     container_name: nginx

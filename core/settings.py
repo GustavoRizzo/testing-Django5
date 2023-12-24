@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'django_rq',
     # apps
     'newfeaturesdiscovery',
     'book_store',
@@ -133,3 +134,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'redis',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 360,
+    }
+}
+
+RQ_EXCEPTION_HANDLERS = []
