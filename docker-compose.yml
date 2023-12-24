@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  django-application:
+  django-application: &django
     build:
       context: .
       args:
@@ -24,6 +24,13 @@ services:
     restart: unless-stopped
     expose:
       - "6379"
+
+  worker:
+    <<: *django
+    container_name: worker
+    command: python manage.py rqworker
+    depends_on:
+      - redis
 
   nginx:
     image: nginx:latest
