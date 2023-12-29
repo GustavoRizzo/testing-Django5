@@ -25,13 +25,6 @@ services:
     expose:
       - "6379"
 
-  worker:
-    <<: *django
-    container_name: worker
-    command: python manage.py rqworker
-    depends_on:
-      - redis
-
   nginx:
     image: nginx:latest
     container_name: nginx

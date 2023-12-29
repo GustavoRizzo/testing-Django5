@@ -26,8 +26,9 @@ RUN python manage.py collectstatic --noinput
 ## DEV is used in development environment
 FROM django as dev
 
-# Start the Django
-CMD python manage.py runserver 0.0.0.0:8000
+# Run worker and server
+CMD python manage.py rqworker & \
+    python manage.py runserver 0.0.0.0:8000
 
 ## PROD contains the frontend application served by nginx
 FROM django AS prod
@@ -35,5 +36,7 @@ FROM django AS prod
 # Expose a porta 80
 EXPOSE 80
 
-# Run
-CMD gunicorn -c gunicorn.py "core.wsgi:application" && nginx -g "daemon off;"
+# Run worker, server and nginx
+CMD python manage.py rqworker & \
+    gunicorn -c gunicorn.py "core.wsgi:application" && \
+    nginx -g "daemon off;"
