@@ -13,11 +13,9 @@
 
   </head>
   <body>
+    <h1> lista Courses </h1>    
 
-    <h1>Hello, world!</h1>
-    <h1> lista Courses </h1>
-    
-
+    {% comment %} Form {% endcomment %}
     <form>
       {% csrf_token %}
       <label>Name</label>
@@ -26,17 +24,17 @@
       <button type="submit" class="btn btn-primary"
       hx-post="{% url "save_course" %}"
       hx-trigger="click"
-      hx-target="#list-courses"
+      hx-target="#list-courses" {% comment %} avisa que vai atualizar o conteudo da lista {% endcomment %}
       hx-swap="innerHTML"
       >Submit</button>
     </form>
 
+    {% comment %} List Courses {% endcomment %}
     <div id="list-courses" 
     hx-get="{% url 'load_list_courses' %}" 
     hx-trigger="load"
     >
     looading...
-      {% comment %} {% include './comp_list_all_courses.html' %} {% endcomment %}
     </div>
 
 
