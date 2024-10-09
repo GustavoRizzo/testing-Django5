@@ -1,0 +1,15 @@
+
+<h1>Criar Novo Curso</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ course_form.as_p }}
+    <h2>Criar Novo Aluno</h2>
+    {{ student_form.as_p }}
+    <button type="submit">Salvar Curso</button>
+</form>
+
+<script>
+  // Exemplo usando JavaScript para abrir um modal com o formulário do aluno
+  // Você pode adaptar este código para o seu framework de front-end preferido
+  document.getElementById('id_name').focus(); // Colocar foco no primeiro campo do formulário do Aluno
+</script>

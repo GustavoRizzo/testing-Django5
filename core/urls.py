@@ -40,4 +40,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('book_store.urls')),
     path('django-rq/', include('django_rq.urls')),
+    path('', include('course.urls')),
 ]

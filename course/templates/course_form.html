@@ -1,0 +1,18 @@
+<h1>olá mundo</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Save</button>
+</form>
+
+<script type="text/javascript">
+    // Script to open pop-up for adding a Student
+    document.querySelectorAll('a.related-lookup').forEach(function(element) {
+        element.addEventListener('click', function(event) {
+            event.preventDefault();
+            window.open(event.target.href, 'Add Student', 'height=500,width=800');
+        });
+    });
+</script>
