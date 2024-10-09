@@ -1,4 +1,4 @@
-from book_store.task import somar_dois_numeros
+from book_store.task import add
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,7 +13,8 @@ class BookViewSet(viewsets.ModelViewSet):
 @api_view(['GET'])
 def resultado_tarefa(request, a, b):
     # Chama a tarefa assíncrona para somar dois números
-    task_result = somar_dois_numeros.delay(a, b)
+    # task_result = somar_dois_numeros.delay(a, b)
+    task_result = add(a, b)
 
     # Retorna uma resposta com o ID da tarefa para que o cliente possa verificar o status posteriormente
-    return Response({'task_id': task_result.id})
+    return Response({'task_id': task_result})

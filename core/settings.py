@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'django_rq',
+    'celery',
+    #'django_rq',
     # apps
     'newfeaturesdiscovery',
     'book_store',
@@ -136,13 +137,22 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-RQ_QUEUES = {
-    'default': {
-        'HOST': 'redis',
-        'PORT': 6379,
-        'DB': 0,
-        'DEFAULT_TIMEOUT': 360,
-    }
-}
+# RQ_QUEUES = {
+#     'default': {
+#         'HOST': 'redis',
+#         'PORT': 6379,
+#         'DB': 0,
+#         'DEFAULT_TIMEOUT': 360,
+#     }
+# }
 
-RQ_EXCEPTION_HANDLERS = []
+# RQ_EXCEPTION_HANDLERS = []
+
+
+# Celery Configuration Options
+CELERY_TIMEZONE = "Australia/Tasmania"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_RESULT_BACKEND = 'rpc://'

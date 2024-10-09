@@ -24,6 +24,8 @@ services:
     restart: unless-stopped
     expose:
       - "6379"
+    ports:
+      - "${DOCKER_REDIS_PORT:-6379}:6379"
 
   nginx:
     image: nginx:latest
