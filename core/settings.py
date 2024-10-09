@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # apps
     'newfeaturesdiscovery',
     'book_store',
+    'course'
 ]
 
 MIDDLEWARE = [
