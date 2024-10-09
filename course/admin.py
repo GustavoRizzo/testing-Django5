@@ -11,7 +11,7 @@ class StudentAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    form = CourseForm  # Define o formulário customizado
+    # form = CourseForm  # Define o formulário customizado
     list_display = ['name', 'students_list']
     search_fields = ['name']
     filter_horizontal = ['students']  # Adiciona um filtro horizontal para a relação Many-to-Many
