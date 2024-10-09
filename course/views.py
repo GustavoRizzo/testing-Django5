@@ -41,3 +41,8 @@ def create_course(request):
         course_form = CourseForm()
         student_form = StudentForm()
     return render(request, 'create_course.html', {'course_form': course_form, 'student_form': student_form})
+
+
+def list_courses(request):
+    courses = Course.objects.all()
+    return render(request, 'list_courses.html', {'courses': courses})
