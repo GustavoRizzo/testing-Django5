@@ -1,11 +1,15 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 from course.models import Course
 
 
+def load_list_courses(request):
+    courses = Course.objects.all()
+    return render(request, './comp_list_all_courses.html', {'courses': courses})
+
+
 def save_course(request):
     name = request.POST.get('name')
-    print(f"Saving course with name: {name}")
-    obj = Course.objects.create(name=name)
-    print(f"Course saved with id: {obj.id}")
-    return HttpResponse(f"Course saved successfully, id: {obj.id}")
+    Course.objects.create(name=name)
+    return load_list_courses(request)

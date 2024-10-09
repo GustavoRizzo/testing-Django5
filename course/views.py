@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from .forms import CourseForm, StudentForm
 from .models import Course
-from .forms import CourseForm
+from django.contrib import messages  # Para mensagens flash
+
 
 def create_edit_course(request, course_id=None):
     if course_id:
@@ -18,11 +20,6 @@ def create_edit_course(request, course_id=None):
 
     # return render(request, 'course_form.html', {})
     return render(request, 'course_form.html', {'form': form})
-
-
-from django.shortcuts import render, redirect
-from .forms import CourseForm, StudentForm
-from django.contrib import messages  # Para mensagens flash
 
 
 def create_course(request):

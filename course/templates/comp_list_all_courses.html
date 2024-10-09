@@ -1,0 +1,14 @@
+<h1>Component List All Courses</h1>
+{% if courses %}
+    <ul class="list-group">
+        {% for course in courses %}
+            <li class="list-group-item">
+                {{ course.name }}
+                {% comment %} <a href="{% url 'course:comp_course_detail' course.id %}">{{ course.name }}</a> {% endcomment %}
+            </li>
+        {% endfor %}
+
+    </ul>
+{% else %}
+    <h4>No courses to show.</h4>
+{% endif %}

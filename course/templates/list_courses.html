@@ -20,18 +20,23 @@
 
     <form>
       {% csrf_token %}
-      <label>Name</lable>
+      <label>Name</label>
       <input type="text" name="name" class="form-control"></input>
 
       <button type="submit" class="btn btn-primary"
       hx-post="{% url "save_course" %}"
       hx-trigger="click"
       hx-target="#list-courses"
+      hx-swap="innerHTML"
       >Submit</button>
     </form>
 
-    <div id="list-courses">
-
+    <div id="list-courses" 
+    hx-get="{% url 'load_list_courses' %}" 
+    hx-trigger="load"
+    >
+    looading...
+      {% comment %} {% include './comp_list_all_courses.html' %} {% endcomment %}
     </div>
 
 

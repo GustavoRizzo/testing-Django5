@@ -11,6 +11,7 @@ urlpatterns = [
 
 htmx_urlpatterns = [
     path('save_course/', htmx_views.save_course, name='save_course'),
+    path('load_list_courses/', htmx_views.load_list_courses, name='load_list_courses'),
 ]
 
 urlpatterns += htmx_urlpatterns
